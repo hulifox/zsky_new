@@ -41,7 +41,7 @@ file_path = os.path.join(os.path.dirname(__file__), 'uploads')
 app = Flask(__name__)
 app.config['DEBUG']=True
 app.config['SECRET_KEY'] = 'super-secret'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:123456@127.0.0.1:3306/zsky'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:123456@db.example.com:3306/zsky'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_POOL_SIZE']=5000
 db = SQLAlchemy(app)
@@ -64,10 +64,11 @@ cache = Cache(app,config = {
 cache.init_app(app)
 
 
-DB_HOST='127.0.0.1'
+DB_HOST='db.example.com'
 DB_NAME_MYSQL='zsky'
 DB_PORT_MYSQL=3306
 DB_NAME_SPHINX='film'
+DB_HOST_SPHINX='db.example.com'
 DB_PORT_SPHINX=9306
 DB_USER='root'
 DB_PASS='123456'
@@ -198,7 +199,7 @@ def tothunder_filter(magnet):
 app.add_template_filter(tothunder_filter,'tothunder')
 
 def sphinx_conn():
-    conn = MySQLdb.connect(host=DB_HOST, port=DB_PORT_SPHINX, user=DB_USER, passwd=DB_PASS, db=DB_NAME_SPHINX,
+    conn = MySQLdb.connect(host=DB_HOST_SPHINX, port=DB_PORT_SPHINX, user=DB_USER, passwd=DB_PASS, db=DB_NAME_SPHINX,
                            charset=DB_CHARSET, cursorclass=MySQLdb.cursors.DictCursor)
     curr = conn.cursor()
     return (conn,curr)
@@ -599,12 +600,12 @@ def init_db():
 @manager.option('-p', '--password', dest='password')
 def create_user(name,password,email):
     if name is None:
-        name = raw_input('输入用户名(默认admin):') or 'admin'
+        name = raw_input('输入用户名(默认iseepig):') or 'iseepig'
     if password is None:
-        password = generate_password_hash(getpass('密码:'))
+        password = generate_password_hash(getpass('密码:')) or 'fh2oig0h9823fIUHIuyh98*Tbiio'
     if email is None:
         email=raw_input('Email地址:')
-    user = User(name=name,password=password,email=email)
+    user = User(name=name,password=password,email=email) or 'admin@admin.com'
     db.session.add(user)
     db.session.commit()
     print("管理员创建成功!")

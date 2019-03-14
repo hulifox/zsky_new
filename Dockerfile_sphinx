@@ -1,0 +1,49 @@
+# vim:set ft=dockerfile:
+FROM ubuntu:bionic
+
+
+
+########################sphinx########################
+
+RUN set -ex; \
+	apt-get update; \
+	sphinxDeps=' \
+		git \
+		gcc \
+		g++ \
+		cmake \
+		libmysqlclient-dev \
+		automake \
+	'; \
+	apt-get update; \
+	apt-get install -y $sphinxDeps;
+	
+RUN git clone https://github.com/wenguonideshou/sphinx-jieba \
+	&& cd sphinx-jieba \
+	&& git submodule update --init --recursive \
+	&& ./configure --prefix=/usr/local/sphinx-jieba \
+	&& \cp -r cppjieba/include/cppjieba src/  \
+	&& \cp -r cppjieba/deps/limonp src/  \
+	&& make install \
+	&& \cp -r cppjieba/dict/* /usr/local/sphinx-jieba/etc/  \
+	&& cd /usr/local/sphinx-jieba/ \
+	&& \cp etc/jieba.dict.utf8 etc/xdictjieba.dict.utf8 \
+	&& \cp etc/user.dict.utf8 etc/xdictuser.dict.utf8 \
+	&& \cp etc/hmm_model.utf8 etc/xdicthmm_model.utf8 \
+	&& \cp etc/idf.utf8 etc/xdictidf.utf8 \
+	&& \cp etc/stop_words.utf8 etc/xdictstop_words.utf8 
+	
+	
+RUN apt-get purge -y --auto-remove $sphinxDeps;
+RUN mkdir /root/config;
+	
+ADD sphinx.conf /root/config/
+
+ADD entrypoint.sh /entrypoint.sh
+	
+ENTRYPOINT ["sh", "/entrypoint.sh"]
+
+
+EXPOSE 9306
+EXPOSE 9312
+
