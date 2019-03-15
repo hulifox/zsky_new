@@ -49,13 +49,16 @@ sleep 10
 
 
 rabbitmq-plugins enable rabbitmq_management
+
 rabbitmqctl add_user  $MQUSER $MQPASS
 rabbitmqctl set_user_tags $MQUSER administrator
 rabbitmqctl set_permissions -p / $MQUSER '.*' '.*' '.*'
 
+rabbitmqctl eval 'rabbit_exchange:declare({resource, <<"/">>, exchange, <<"store">>}, topic, true, false, false, []).'
 
 nohup java -jar -Xms50m -Xmx128m /root/config/youseed-spider-saver-public-1.0.0.jar --config=/root/config/youseed-spider-saver.yml zsky > /root/config/spider-saver-mongo.log 2>&1 &
-		
+rabbitmqctl delete_user guest		
+
 while true;do
  echo 'starting indexer.';
  /usr/local/sphinx-jieba/bin/indexer -c /root/config/sphinx.conf film --rotate
