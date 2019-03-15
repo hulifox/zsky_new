@@ -41,6 +41,11 @@ RUN mkdir /root/config;
 RUN cp zsky_new/sphinx.conf /root/config/; \	
 	cp zsky_new/sphinx.sh /entrypoint.sh
 	
+		
+RUN apt-get install rabbitmq
+	
+	
+	
 ENTRYPOINT ["sh", "/entrypoint.sh"]
 
 

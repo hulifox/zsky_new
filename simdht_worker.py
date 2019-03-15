@@ -14,8 +14,10 @@ import time
 import datetime
 import traceback
 import sys
+reload(sys)
 import json
 import threading
+sys.setdefaultencoding('utf8')
 from hashlib import sha1
 from random import randint
 from socket import inet_ntoa
@@ -39,9 +41,10 @@ except:
 
 
 DB_NAME = 'zsky'
-DB_HOST = '127.0.0.1'
-DB_USER = 'root'
-DB_PASS = '123456'
+DB_HOST = 'db.iseepig.com'
+DB_USER = 'iseepig'
+DB_PASS = 'khkHKGHIUT092fgF7tRR76trjt76tT8t'
+DB_PORT = 6291
 BOOTSTRAP_NODES = (
     ("router.bittorrent.com", 6881),
     ("dht.transmissionbt.com", 6881),
@@ -382,7 +385,7 @@ class Master(Thread):
         self.setDaemon(True)
         self.queue = Queue(maxsize = 1000000)
         self.metadata_queue = Queue(maxsize = 1000000)
-        self.pool = PooledDB(MySQLdb,50,host=DB_HOST,user=DB_USER,passwd=DB_PASS,db=DB_NAME,port=3306,charset="utf8mb4") #50为连接池里的最少连接数
+        self.pool = PooledDB(MySQLdb,50,host=DB_HOST,user=DB_USER,passwd=DB_PASS,db=DB_NAME,port=DB_PORT,charset="utf8mb4") #50为连接池里的最少连接数
         self.dbconn = self.pool.connection()
         self.dbcurr = self.dbconn.cursor()
         self.dbcurr.execute('SET NAMES utf8mb4')

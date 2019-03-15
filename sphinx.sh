@@ -24,6 +24,18 @@ echo
 /usr/local/sphinx-jieba/bin/indexer -c /root/config/sphinx.conf film --rotate
 /usr/local/sphinx-jieba/bin/searchd --config /root/config/sphinx.conf
 		
+
+rabbitmq-plugins enable rabbitmq_management
+
+rabbitmq-server &
+
+
+rabbitmqctl add_user  $MQUSER $MQPASS
+rabbitmqctl set_user_tags $MQUSER administrator
+rabbitmqctl set_permissions -p / $MQUSER '.*' '.*' '.*'
+
+
+
 		
 while true;do
  echo 'starting indexer.';

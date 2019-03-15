@@ -9,9 +9,9 @@
 
 
 cd /root/zsky_new
-
-if [ "${DBUSER_PASS}" != "" ]; then
-	sed -i -e 's|123456|'$DBUSER_PASS'|' manage.py
+mkdir uploads
+if [ "${DBPASS}" != "" ]; then
+	sed -i -e 's|123456|'$DBPASS'|' manage.py
 #	sed -i -e 's|123456|'$MYSQL_ROOT_PASSWORD'|' simdht_worker.py
 fi
 if [ "${DBUSER}" != "" ]; then
