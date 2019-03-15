@@ -29,6 +29,7 @@ rabbitmq-plugins enable rabbitmq_management
 
 rabbitmq-server &
 
+sleep 10
 
 rabbitmqctl add_user  $MQUSER $MQPASS
 rabbitmqctl set_user_tags $MQUSER administrator

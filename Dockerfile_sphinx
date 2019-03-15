@@ -42,7 +42,7 @@ RUN cp zsky_new/sphinx.conf /root/config/; \
 	cp zsky_new/sphinx.sh /entrypoint.sh
 	
 		
-RUN apt-get install rabbitmq
+RUN apt-get -y install rabbitmq-server
 	
 	
 	

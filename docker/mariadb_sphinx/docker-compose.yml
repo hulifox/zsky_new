@@ -1,0 +1,55 @@
+version: "2"
+
+
+services:
+
+
+  mariadb_sphinx:
+     container_name: mariadb_sphinx
+     image: mariadb
+     ports:
+      - "6291:6291" 
+     volumes:
+       - ./conf.d:/etc/mysql/conf.d
+       - ./datadir:/var/lib/mysql
+       - ./init:/docker-entrypoint-initdb.d
+     environment:
+        MYSQL_ROOT_PASSWORD: HFIY94T98yhg9T98YG8FY89Y98g8yvj
+        DBUSER1: iseepig
+        DBPASS1: khkHKGHIUT092fgF7tRR76trjt76tT8t
+        DBUSER2: scrap
+        DBPASS2: 112c23uf23uf93uhg3qgu980u9U9hvoi38o
+     restart: always     
+     # networks:
+        # - nginx_net
+        
+# networks:
+    # nginx_net:
+       # external: true
+  sphinx:
+     image: sphinx
+     container_name: sphinx
+     depends_on:
+       - mariadb_sphinx
+     ports:
+       - "9306:9306" 
+       - "9312:9312" 
+       - "5672:5672" 
+       - "15672:15672" 
+     volumes:
+       - ./conf.d:/sphinx.conf.d
+     environment:
+        DBUSER: iseepig
+        DBPASS: khkHKGHIUT092fgF7tRR76trjt76tT8t
+        DBHOST: mariadb_sphinx
+        DBPORT: 6291
+        MQUSER: iseepigmq
+        MQPASS: 928hgf983g09u408h
+     restart: always 
+      
+      
+      
+      
+      
+      
+      
