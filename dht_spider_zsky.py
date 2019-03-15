@@ -75,10 +75,10 @@ HASH_ID_EXPIRES = 3600 * 24 * 1 #已存在的Hash缓存多久
 BAD_HASH_EXPIRES = 3600 * 1     #无法下载的short_hash缓存缓存多久
 
 ############RabbitMQ消息队列配置###########
-MQ_HOST = '45.59.126.55'
+MQ_HOST = 'db.iseepig.com'
 MQ_PORT = 5672
-MQ_USER = 'iseepig_mq'
-MQ_PASSWD = 'oiwjgoijeogh98h49hg3h'
+MQ_USER = 'iseepigmq'
+MQ_PASSWD = '928hgf983g09u408h'
 MQ_VIRTUAL_HOSTS = '/'
 
 #用于存储和搜索的数据，各自保存几个副本
