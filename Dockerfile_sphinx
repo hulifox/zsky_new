@@ -40,7 +40,8 @@ RUN mkdir /root/config;
 	
 RUN cp zsky_new/sphinx.conf /root/config/; \	
 	cp zsky_new/sphinx.sh /entrypoint.sh; \
-	cp zsky_new/youseed-spider-saver.yml /root/config/
+	cp zsky_new/youseed-spider-saver.yml /root/config/; \
+	cp zsky_new/youseed-spider-saver-public-1.0.0.jar /root/config/
 		
 RUN apt-get -y install rabbitmq-server default-jre
 	
