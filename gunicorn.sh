@@ -8,7 +8,7 @@
 # RNGD_FLAG=${RNGD_FLAG:-"false"}
 
 
-cd /root/zsky
+cd /root/zsky_new
 
 if [ "${DBUSER_PASS}" != "" ]; then
 	sed -i -e 's|123456|'$DBUSER_PASS'|' manage.py

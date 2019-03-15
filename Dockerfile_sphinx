@@ -33,13 +33,13 @@ RUN git clone https://github.com/wenguonideshou/sphinx-jieba \
 	&& \cp etc/idf.utf8 etc/xdictidf.utf8 \
 	&& \cp etc/stop_words.utf8 etc/xdictstop_words.utf8 
 	
-	
+RUN git clone https://github.com/ptkey/zsky_new.git
+
 RUN apt-get purge -y --auto-remove $sphinxDeps;
 RUN mkdir /root/config;
 	
-ADD sphinx.conf /root/config/
-
-ADD entrypoint.sh /entrypoint.sh
+RUN cp zsky_new/sphinx.conf /root/config/; \	
+	cp zsky_new/sphinx.sh /entrypoint.sh
 	
 ENTRYPOINT ["sh", "/entrypoint.sh"]
 

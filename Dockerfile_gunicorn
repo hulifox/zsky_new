@@ -6,16 +6,15 @@ ARG TZ='Asia/Shanghai'
 
 ENV TZ $TZ
 RUN echo ${TZ} > /etc/timezone
-
-RUN cd /root;\
-	git clone https://github.com/ptkey/zsky_new; \
-	mv zsky_new zsky
-
 RUN apt update \
     && apt -y install  python-dev python-pip libmysqlclient-dev \
-				 psmisc net-tools lsof redis git;\	
+				 psmisc net-tools lsof redis git
+RUN cd /root \
+	&& git clone https://github.com/ptkey/zsky_new.git
+	
+RUN cd /root/zsky_new; \ 
 	pip install -r requirements.txt; \ 
-	mv gunicorn.sh entrypoint.sh
+	mv gunicorn.sh /entrypoint.sh
 	
 
 
