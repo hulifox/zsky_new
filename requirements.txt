@@ -6,7 +6,6 @@ Flask_Caching
 Flask_Script
 requests
 jieba
-mysqlclient
 WTForms
 Flask_SQLAlchemy
 Werkzeug
