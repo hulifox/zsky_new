@@ -32,12 +32,12 @@ es:
   url: 127.0.0.1
   port: 9300
 
-#mysql连接配置
+#mysql连接配置 
 mysql:
-  url: jdbc:mysql://localhost:3306/zsky?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+  url: jdbc:mysql://localhost:3306/zsky?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B0
   user: root
   psw: 123456
-  
+  #####有个时区的bug暂时修正为GMT+0
 
 #########全局配置#########
 #消息队列声明和消费者绑定配置

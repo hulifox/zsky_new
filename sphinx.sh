@@ -56,7 +56,11 @@ rabbitmqctl set_permissions -p / $MQUSER '.*' '.*' '.*'
 
 rabbitmqctl eval 'rabbit_exchange:declare({resource, <<"/">>, exchange, <<"store">>}, topic, true, false, false, []).'
 
-nohup java -jar -Xms50m -Xmx128m /root/config/youseed-spider-saver-public-1.0.0.jar --config=/root/config/youseed-spider-saver.yml zsky > /root/config/spider-saver-mongo.log 2>&1 &
+nohup java -jar -Xms50m -Xmx128m /root/config/youseed-spider-saver-public-1.0.0.jar --config=/root/config/youseed-spider-saver.yml zsky > /dev/null 2>&1 &
+nohup java -jar -Xms50m -Xmx128m /root/config/youseed-spider-saver-public-1.0.0.jar --config=/root/config/youseed-spider-saver.yml zsky > /dev/null 2>&1 &
+nohup java -jar -Xms50m -Xmx128m /root/config/youseed-spider-saver-public-1.0.0.jar --config=/root/config/youseed-spider-saver.yml zsky > /dev/null 2>&1 &
+
+
 rabbitmqctl delete_user guest		
 
 while true;do

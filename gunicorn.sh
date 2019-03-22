@@ -40,7 +40,8 @@ python manage.py create_user -u $ADMIN_NAME -p $ADMIN_PASS -e $ADMIN_EMAIL
 
 
 #启动后端gunicorn+gevent,开启日志并在后台运行
-nohup gunicorn -k gevent --access-logfile zsky.log --error-logfile zsky_err.log  manage:app -b 0.0.0.0:8000 -w 4 --reload>/dev/zero 2>&1&  
+#nohup gunicorn -k gevent --access-logfile zsky.log --error-logfile zsky_err.log  manage:app -b 0.0.0.0:8000 -w 4 --reload>/dev/zero 2>&1&  
+nohup gunicorn --access-logfile zsky.log --error-logfile zsky_err.log  manage:app -b 0.0.0.0:8000 -w 4 --reload>/dev/zero 2>&1&  
 
 
 
