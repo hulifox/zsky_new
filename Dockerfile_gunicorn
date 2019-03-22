@@ -5,10 +5,13 @@ LABEL maintainer="test <test@gmail.com>"
 ARG TZ='Asia/Shanghai'
 
 ENV TZ $TZ
-RUN echo ${TZ} > /etc/timezone
+
 RUN apt update \
     && apt -y install  python-dev python-pip libmysqlclient-dev python-mysqldb \
-				 psmisc net-tools lsof redis git tzdata
+				 psmisc net-tools lsof redis git 
+				 
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt -y install tzdata
 RUN cd /root \
 	&& git clone https://github.com/ptkey/zsky_new.git
 	
